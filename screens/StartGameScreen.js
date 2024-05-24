@@ -4,8 +4,16 @@ import PrimaryButton from '../components/PrimaryButton';
 function StartGameScreen() {
   return (
     <View style={styles.inputContainer}>
-      {/* 50 Added style and maxLength*/}
-      <TextInput style={styles.numberInput} maxLength={2} />
+      {/* 
+      50 style and maxLength
+      51 keyboardType, autoCapitalize 
+      */}
+      <TextInput
+        style={styles.numberInput}
+        maxLength={2}
+        keyboardType="number-pad"
+        autoCapitalize="none"
+      />
       <PrimaryButton>Reset</PrimaryButton>
       <PrimaryButton>Confirm</PrimaryButton>
     </View>
