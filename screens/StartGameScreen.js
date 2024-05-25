@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: '#72063c',
+    backgroundColor: '#640233',
     borderRadius: 8,
     elevation: 4, // Android only concept
     shadowColor: 'black',
