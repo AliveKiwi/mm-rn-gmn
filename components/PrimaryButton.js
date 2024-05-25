@@ -1,9 +1,11 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-function PrimaryButton({ children }) {
-  function pressHandler() {
-    console.log('Pressed');
-  }
+// 57 onPress name is user given in PrimaryButton declaration
+function PrimaryButton({ children, onPress }) {
+  // onPress directly passed to onPress
+  // function pressHandler() {
+  //   onPress();
+  // }
 
   return (
     <View style={styles.buttonOuterContainer}>
@@ -12,6 +14,11 @@ function PrimaryButton({ children }) {
        * The function would be called automatically whenever the button is pressed
        * const { pressed } = pressData
        * All the style ={[]} passed in array is applied to componenet
+       *
+       * 57
+       * onPress={onPress}
+       * onPress on left is prebuilt attribute
+       * onPress on right is user defined prop name
        */}
       <Pressable
         style={({ pressed }) =>
@@ -19,7 +26,7 @@ function PrimaryButton({ children }) {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: '#640233' }}
       >
         <Text style={styles.buttonText}>{children}</Text>
