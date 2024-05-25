@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { TextInput, View, StyleSheet, Alert } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 
-function StartGameScreen() {
+// 59 destructuring prop onPickNumber
+function StartGameScreen({ onPickNumber }) {
   // 57 declared number holder
   const [enteredNumber, setEnteredNumber] = useState('');
 
@@ -29,6 +30,9 @@ function StartGameScreen() {
       );
       return;
     }
+
+    // 59 Passing the number to App screen
+    onPickNumber(choosenNumber);
   }
 
   return (
