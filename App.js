@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     // 55 Use npx expo install install expo-linear-gradient to ensure compatibility of package with SDK
-    <LinearGradient colors={['#ddb52f', '#4e0329']} style={styles.rootScreen}>
+    <LinearGradient colors={['#4e0329', '#ddb52f']} style={styles.rootScreen}>
       {/* 56 ImageBackground
        * 59 changed from <StartGameScreen/> to {screen}
        */}
@@ -45,7 +45,6 @@ export default function App() {
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    paddingTop: 10,
   },
   backgroundImage: { opacity: 0.15 },
 });
