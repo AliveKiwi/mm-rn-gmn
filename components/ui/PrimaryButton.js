@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
 // 63 importing color from constants
-import Colors from '../constants/colors';
+import Colors from '../../constants/colors';
 
 // 57 onPress name is user given in PrimaryButton declaration
 function PrimaryButton({ children, onPress }) {

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import Colors from './constants/colors';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
-import Colors from './constants/colors';
 
 export default function App() {
   // 59 Added userNumber to read from <StartGameScreen/> and pass on to <GameScreen/>
@@ -19,14 +19,15 @@ export default function App() {
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   // 59 Logic to switch screen
+  // 65 passing userNumber as prop to GameScreen
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen userNumber={userNumber} />;
   }
 
   return (
     // 55 Use npx expo install install expo-linear-gradient to ensure compatibility of package with SDK
     <LinearGradient
-      colors={[Colors.primary700, Colors.accent500]}
+      colors={[Colors.primary500, Colors.accent500]}
       style={styles.rootScreen}
     >
       {/* 56 ImageBackground
