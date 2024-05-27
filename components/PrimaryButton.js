@@ -1,5 +1,8 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
+// 63 importing color from constants
+import Colors from '../constants/colors';
+
 // 57 onPress name is user given in PrimaryButton declaration
 function PrimaryButton({ children, onPress }) {
   // onPress directly passed to onPress
@@ -27,7 +30,8 @@ function PrimaryButton({ children, onPress }) {
             : styles.buttonInnerContainer
         }
         onPress={onPress}
-        android_ripple={{ color: '#640233' }}
+        // 63 replaced #hex code with Colors variable
+        android_ripple={{ color: Colors.primary600 }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   },
   // 52
   buttonInnerContainer: {
-    backgroundColor: '#72063c',
+    backgroundColor: Colors.primary500, // 63 replaced #hex code by Colors variable
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2, // Works only in android

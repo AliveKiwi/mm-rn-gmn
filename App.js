@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
+import Colors from './constants/colors';
 
 export default function App() {
   // 59 Added userNumber to read from <StartGameScreen/> and pass on to <GameScreen/>
@@ -24,7 +25,10 @@ export default function App() {
 
   return (
     // 55 Use npx expo install install expo-linear-gradient to ensure compatibility of package with SDK
-    <LinearGradient colors={['#4e0329', '#ddb52f']} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.primary700, Colors.accent500]}
+      style={styles.rootScreen}
+    >
       {/* 56 ImageBackground
        * 59 changed from <StartGameScreen/> to {screen}
        */}
