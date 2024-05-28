@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import Title from '../components/ui/Title';
@@ -19,18 +19,28 @@ function generateRandomBetween(min, max, exclude) {
 }
 
 // 64 userNumber prevent generation of user inputed number in first try
-function GameScreen({ userNumber }) {
+function GameScreen({ userNumber, onGameOver }) {
   // 64 setting initalGuess and currentGuess
-  // const initialGuess = generateRandomBetween(1, 100, userNumber);
+  // 66 re-enabled
+  const initialGuess = generateRandomBetween(1, 100, userNumber);
 
   // 65 replaced the static values from previous line
-  const initialGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
-    userNumber
-  );
+  // 66 commented
+  // const initialGuess = generateRandomBetween(
+  //   minBoundary,
+  //   maxBoundary,
+  //   userNumber
+  // );
 
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  // 66 Game Over logic when rng() guess correct user's number
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      // 66 from App.js file
+      onGameOver(true);
+    }
+  }, [currentGuess, userNumber, onGameOver]);
 
   // 64 defined nextGuessHandler
   function nextGuessHandler(direction) {

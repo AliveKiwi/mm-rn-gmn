@@ -5,14 +5,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Colors from './constants/colors';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
+import GameOverScreen from './screens/GameOverScreen';
 
 export default function App() {
   // 59 Added userNumber to read from <StartGameScreen/> and pass on to <GameScreen/>
   const [userNumber, setUserNumber] = useState();
 
+  // 66 variable to check gameIsOver
+  const [gameIsOver, setGameIsOver] = useState(true);
+
   // 59 To read number from StartGameScreen
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
+    setGameIsOver(false); // 66 Setting gameIsOver to false on game starting
+  }
+
+  // 66 defined function to switch to GameOverScreen
+  function GameOverHandler() {
+    setGameIsOver(true);
   }
 
   // 59 Logic to switch screen
@@ -20,8 +30,16 @@ export default function App() {
 
   // 59 Logic to switch screen
   // 65 passing userNumber as prop to GameScreen
+  // 66 passing GameOverHandler as onGameOver prop
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} />;
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={GameOverHandler} />
+    );
+  }
+
+  // 66 Checking when to switch to GameOverScreen
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />;
   }
 
   return (
