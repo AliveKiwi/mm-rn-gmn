@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
+import PrimaryButton from '../components/ui/PrimaryButton';
+
+// 65 Setting the initial state for RNG()
+let minBoundary = 1;
+let maxBoundary = 100;
 
 // 64 Logic to generate random number
 function generateRandomBetween(min, max, exclude) {
@@ -13,20 +18,71 @@ function generateRandomBetween(min, max, exclude) {
   } else return rndNum;
 }
 
-// userNumber prevent generation of user inputed number in first try
+// 64 userNumber prevent generation of user inputed number in first try
 function GameScreen({ userNumber }) {
-  const initialGuess = generateRandomBetween(1, 100, userNumber);
+  // 64 setting initalGuess and currentGuess
+  // const initialGuess = generateRandomBetween(1, 100, userNumber);
+
+  // 65 replaced the static values from previous line
+  const initialGuess = generateRandomBetween(
+    minBoundary,
+    maxBoundary,
+    userNumber
+  );
+
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  // 64 defined nextGuessHandler
+  function nextGuessHandler(direction) {
+    // if check to prevent user from lying or misleading in game
+    // Example if user input 10, RNG() guess 15, then user need to press lower(-)
+    // Example if user input 10, RNG() guess 5, then user need to press greater(+)
+    if (
+      (direction === 'lower' && currentGuess < userNumber) ||
+      (direction === 'greater' && currentGuess > userNumber)
+    ) {
+      Alert.alert("Don't lie", 'You know that this is wrong...', [
+        { text: 'Sorry!', style: 'cancel' },
+      ]);
+      return;
+    }
+
+    // 65 Updating the maxBoundary for next rng() function call
+    if (direction === 'lower') {
+      maxBoundary = currentGuess;
+    }
+
+    // 65 Updating the minBoundary for next rng() function call
+    if (direction === 'greater') {
+      minBoundary = currentGuess + 1; // + 1 so computer don't reguess same number
+    }
+
+    // 65 Updating currentGuess
+    const newRndNumber = generateRandomBetween(
+      minBoundary,
+      maxBoundary,
+      currentGuess
+    );
+    setCurrentGuess(newRndNumber);
+  }
 
   return (
     <View style={styles.screen}>
-      {/* 63 Added */}
+      {/* 63 Added Title */}
       <Title>Opponent's Guess Screen</Title>
-      {/* 64 Added */}
+      {/* 64 Added NumberContainer */}
       <NumberContainer>{currentGuess}</NumberContainer>
       <View>
         <Text>Higher or lower?</Text>
-        {/* + - */}
+        {/* 65 Added + - Button*/}
+        <View>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+            -
+          </PrimaryButton>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+            +
+          </PrimaryButton>
+        </View>
       </View>
       {/* <View>LOG ROUNDS</View> */}
     </View>
