@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
@@ -98,12 +99,14 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-              -
+              {/* 70 added @expo/vector-icons, is peer dependency of expo */}
+              <Ionicons name="remove-outline" size={24} color="white" />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-              +
+              {/* 70 added @expo/vector-icons, is peer dependency of expo */}
+              <Ionicons name="add-outline" size={24} color="white" />
             </PrimaryButton>
           </View>
         </View>
