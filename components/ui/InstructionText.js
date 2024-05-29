@@ -3,8 +3,10 @@
 import { Text, StyleSheet } from 'react-native';
 import Colors from '../../constants/colors';
 
-function InstructionText({ children }) {
-  return <Text style={styles.instructionText}>{children}</Text>;
+// 69 added style prop to implement/mimic cascading nature of CSS
+// 69 the style on right in array will override the style on left
+function InstructionText({ children, style }) {
+  return <Text style={[styles.instructionText, style]}>{children}</Text>;
 }
 
 export default InstructionText;

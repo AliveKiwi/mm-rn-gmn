@@ -86,16 +86,26 @@ function GameScreen({ userNumber, onGameOver }) {
       <NumberContainer>{currentGuess}</NumberContainer>
       {/* 68 Replaced View with new Card Component */}
       <Card>
-        {/* 68 Replaced Text with new InstructionText Component */}
-        <InstructionText>Higher or lower?</InstructionText>
-        {/* 65 Added + - Button*/}
-        <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-            -
-          </PrimaryButton>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-            +
-          </PrimaryButton>
+        {/* 68 Replaced Text with new InstructionText Component
+         * Passing style as prop to InstructionText UC
+         */}
+        <InstructionText style={styles.instructionText}>
+          Higher or lower?
+        </InstructionText>
+        {/* 65 Added + - Button
+         * 69 added View and style to PrimaryButton
+         */}
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+              -
+            </PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+              +
+            </PrimaryButton>
+          </View>
         </View>
       </Card>
       {/* <View>LOG ROUNDS</View> */}
@@ -110,5 +120,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 24,
+  },
+  instructionText: { marginBottom: 12 },
+  // 69
+  buttonsContainer: {
+    flexDirection: 'row', // Set buttons in rows
+  },
+
+  // 69
+  buttonContainer: {
+    flex: 1, // Make button expand to container
   },
 });
