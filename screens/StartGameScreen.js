@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { TextInput, View, StyleSheet, Alert } from 'react-native';
+
+import Title from '../components/ui/Title';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Colors from '../constants/colors';
+import Card from '../components/ui/Card';
+import InstructionText from '../components/ui/InstructionText';
 
 // 59 destructuring prop onPickNumber
 function StartGameScreen({ onPickNumber }) {
@@ -37,32 +41,38 @@ function StartGameScreen({ onPickNumber }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      {/* 
+    <View style={styles.rootContainer}>
+      <Title>Guess My Number</Title>
+      {/* 68 Replaced View with Card */}
+      <Card>
+        {/* 68 Replaced Text with InstructionText */}
+        <InstructionText>Enter a Number</InstructionText>
+        {/* 
       50 style and maxLength
       51 keyboardType, autoCapitalize 
       53 wrapped PrimaryButton in View, and added buttonsContainer & buttonContainer
       57 autoCorrect, onChangeText, value
-      */}
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={numberInputHandler}
-        value={enteredNumber}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          {/* 58 added onPress*/}
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+    */}
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={numberInputHandler}
+          value={enteredNumber}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            {/* 58 added onPress*/}
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            {/* 57 added onPress*/}
+            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          {/* 57 added onPress*/}
-          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 }
@@ -70,11 +80,18 @@ function StartGameScreen({ onPickNumber }) {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  // 49
+  // 67 to top level View
+  rootContainer: {
+    flex: 1,
+    marginTop: 100,
+    alignItems: 'center',
+  },
+
+  // 49 to View of TextInput
   inputContainer: {
     justifyContent: 'center', // 53 To center TextInput
     alignItems: 'center', // 53 To center TextInput
-    marginTop: 100,
+    marginTop: 36,
     marginHorizontal: 24,
     padding: 16,
     backgroundColor: Colors.primary800,
@@ -85,7 +102,15 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.25,
   },
-  // 50
+
+  // 67 to Enter a Number
+  // 68 moved to InstructionText Component
+  // instructionText: {
+  //   color: Colors.accent500,
+  //   fontSize: 24,
+  // },
+
+  // 50 to TextInput
   numberInput: {
     height: 50,
     width: 50,
@@ -97,10 +122,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center', // Align text to center of text box / TextInput
   },
+
   // 53
   buttonsContainer: {
     flexDirection: 'row', // Set buttons in rows
   },
+
   // 53
   buttonContainer: {
     flex: 1, // Make button expand to container

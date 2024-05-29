@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 
 import Title from '../components/ui/Title';
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
+import Card from '../components/ui/Card';
+import InstructionText from '../components/ui/InstructionText';
 
 // 65 Setting the initial state for RNG()
 let minBoundary = 1;
@@ -82,8 +84,10 @@ function GameScreen({ userNumber, onGameOver }) {
       <Title>Opponent's Guess Screen</Title>
       {/* 64 Added NumberContainer */}
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or lower?</Text>
+      {/* 68 Replaced View with new Card Component */}
+      <Card>
+        {/* 68 Replaced Text with new InstructionText Component */}
+        <InstructionText>Higher or lower?</InstructionText>
         {/* 65 Added + - Button*/}
         <View>
           <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
@@ -93,7 +97,7 @@ function GameScreen({ userNumber, onGameOver }) {
             +
           </PrimaryButton>
         </View>
-      </View>
+      </Card>
       {/* <View>LOG ROUNDS</View> */}
     </View>
   );
