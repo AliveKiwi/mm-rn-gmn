@@ -1,5 +1,3 @@
-// 63 When the file was created
-
 const Colors = {
   primary500: '#72063c',
   primary600: '#640233',
@@ -9,3 +7,5 @@ const Colors = {
 };
 
 export default Colors;
+
+// 63 When the file was created
