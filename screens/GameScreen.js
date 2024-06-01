@@ -7,6 +7,7 @@ import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/InstructionText';
+import GuessLogItem from '../components/game/GuessLogItem';
 
 // 65 Setting the initial state for RNG()
 let minBoundary = 1;
@@ -89,6 +90,8 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
 
+  const guessRoundsListLength = guessRounds.length;
+
   return (
     <View style={styles.screen}>
       {/* 63 Added Title */}
@@ -130,7 +133,14 @@ function GameScreen({ userNumber, onGameOver }) {
       {/* 76 FlatList */}
       <FlatList
         data={guessRounds}
-        renderItem={(itemData) => <Text>{itemData.item}</Text>}
+        renderItem={(itemData) => (
+          <GuessLogItem
+            roundNumber={guessRoundsListLength - itemData.index}
+            guess={itemData.item}
+          >
+            {itemData.item}
+          </GuessLogItem>
+        )}
         keyExtractor={(item) => item}
       />
     </View>
