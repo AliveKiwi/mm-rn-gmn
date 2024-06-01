@@ -16,6 +16,9 @@ export default function App() {
   // 66 variable to check gameIsOver
   const [gameIsOver, setGameIsOver] = useState(true);
 
+  // 74 variable to keep track of number of Guess
+  const [guessRounds, setGuessRounds] = useState(0);
+
   // 71 package expo-font
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -39,6 +42,12 @@ export default function App() {
     setGameIsOver(true);
   }
 
+  // 74 function to reset restart game
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setGuessRounds(0);
+  }
+
   // 59 Logic to switch screen
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
@@ -53,7 +62,13 @@ export default function App() {
 
   // 66 Checking when to switch to GameOverScreen
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={guessRounds}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (

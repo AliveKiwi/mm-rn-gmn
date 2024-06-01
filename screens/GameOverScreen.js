@@ -5,7 +5,7 @@ import Title from '../components/ui/Title';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Colors from '../constants/colors';
 
-function GameOverScreen() {
+function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
   return (
     <View style={styles.rootContainer}>
       <Title>GAME OVER!</Title>
@@ -17,11 +17,11 @@ function GameOverScreen() {
       </View>
       <Text style={styles.summaryText}>
         Your phone needed
-        <Text style={styles.highlight}> X </Text>
+        <Text style={styles.highlight}> {roundsNumber} </Text>
         rounds to guess the number
-        <Text style={styles.highlight}> Y </Text>.
+        <Text style={styles.highlight}> {userNumber} </Text>.
       </Text>
-      <PrimaryButton>Start New Game</PrimaryButton>
+      <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
     </View>
   );
 }
@@ -29,12 +29,15 @@ function GameOverScreen() {
 export default GameOverScreen;
 
 const styles = StyleSheet.create({
+  // 72
   rootContainer: {
     flex: 1,
     padding: 24,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  // 72
   imageContainer: {
     width: 300,
     height: 300,
@@ -44,16 +47,20 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     margin: 36,
   },
+
+  // 72
   image: {
     width: '100%',
     height: '100%',
   },
+  // 73
   summaryText: {
     fontFamily: 'open-sans',
     fontSize: 24,
     textAlign: 'center',
     marginBottom: 24,
   },
+  // 73
   highlight: {
     fontFamily: 'open-sans-bold',
     color: Colors.primary500,

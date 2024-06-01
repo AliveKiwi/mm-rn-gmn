@@ -45,6 +45,12 @@ function GameScreen({ userNumber, onGameOver }) {
     }
   }, [currentGuess, userNumber, onGameOver]);
 
+  // 74 Reset when component rerender for first time
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
+
   // 64 defined nextGuessHandler
   function nextGuessHandler(direction) {
     // if check to prevent user from lying or misleading in game
