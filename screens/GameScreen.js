@@ -45,7 +45,7 @@ function GameScreen({ userNumber, onGameOver }) {
   useEffect(() => {
     if (currentGuess === userNumber) {
       // 66 from App.js file
-      onGameOver(true);
+      onGameOver(guessRounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -125,24 +125,28 @@ function GameScreen({ userNumber, onGameOver }) {
         </View>
       </Card>
       {/* 75 <View>LOG ROUNDS</View> */}
-      {/* <View>
+      {/*
         {guessRounds.map((guessRound) => (
           <Text key={guessRound}>{guessRound}</Text>
         ))}
-      </View> */}
-      {/* 76 FlatList */}
-      <FlatList
-        data={guessRounds}
-        renderItem={(itemData) => (
-          <GuessLogItem
-            roundNumber={guessRoundsListLength - itemData.index}
-            guess={itemData.item}
-          >
-            {itemData.item}
-          </GuessLogItem>
-        )}
-        keyExtractor={(item) => item}
-      />
+      */}
+      <View style={styles.listContainer}>
+        {/* 76 FlatList
+         * 77 GuessLogItem
+         */}
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundNumber={guessRoundsListLength - itemData.index}
+              guess={itemData.item}
+            >
+              {itemData.item}
+            </GuessLogItem>
+          )}
+          keyExtractor={(item) => item}
+        />
+      </View>
     </View>
   );
 }
@@ -164,5 +168,11 @@ const styles = StyleSheet.create({
   // 69
   buttonContainer: {
     flex: 1, // Make button expand to container
+  },
+
+  // 78
+  listContainer: {
+    flex: 1,
+    padding: 24,
   },
 });

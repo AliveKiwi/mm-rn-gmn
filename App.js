@@ -38,8 +38,9 @@ export default function App() {
   }
 
   // 66 defined function to switch to GameOverScreen
-  function GameOverHandler() {
+  function gameOverHandler(numberOfRounds) {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
   }
 
   // 74 function to reset restart game
@@ -53,10 +54,10 @@ export default function App() {
 
   // 59 Logic to switch screen
   // 65 passing userNumber as prop to GameScreen
-  // 66 passing GameOverHandler as onGameOver prop
+  // 66 passing gameOverHandler as onGameOver prop
   if (userNumber) {
     screen = (
-      <GameScreen userNumber={userNumber} onGameOver={GameOverHandler} />
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
     );
   }
 
