@@ -13,6 +13,7 @@ export default InstructionText;
 
 const styles = StyleSheet.create({
   instructionText: {
+    fontFamily: 'open-sans', // 71 custom font using useFonts({}) hook
     color: Colors.accent500,
     fontSize: 24,
   },

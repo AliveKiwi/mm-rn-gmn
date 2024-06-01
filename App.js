@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 import Colors from './constants/colors';
 import StartGameScreen from './screens/StartGameScreen';
@@ -13,6 +15,18 @@ export default function App() {
 
   // 66 variable to check gameIsOver
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  // 71 package expo-font
+  const [fontsLoaded] = useFonts({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+  });
+
+  // 71 If fonts not loaded
+  if (!fontsLoaded) {
+    // AppLoading is deprecated
+    return <AppLoading />;
+  }
 
   // 59 To read number from StartGameScreen
   function pickedNumberHandler(pickedNumber) {
