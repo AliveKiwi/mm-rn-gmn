@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Title from '../components/ui/Title';
@@ -36,6 +36,9 @@ function GameScreen({ userNumber, onGameOver }) {
   // );
 
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  // 75 keep track of number of guess
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   // 66 Game Over logic when rng() guess correct user's number
   useEffect(() => {
@@ -83,6 +86,7 @@ function GameScreen({ userNumber, onGameOver }) {
       currentGuess
     );
     setCurrentGuess(newRndNumber);
+    setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
 
   return (
@@ -117,7 +121,12 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      {/* <View>LOG ROUNDS</View> */}
+      {/* 75 <View>LOG ROUNDS</View> */}
+      <View>
+        {guessRounds.map((guessRound) => (
+          <Text key={guessRound}>{guessRound}</Text>
+        ))}
+      </View>
     </View>
   );
 }
