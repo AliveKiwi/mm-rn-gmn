@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { TextInput, View, StyleSheet, Alert } from 'react-native';
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Alert,
+  useWindowDimensions,
+} from 'react-native';
 
 import Title from '../components/ui/Title';
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -9,6 +15,9 @@ import InstructionText from '../components/ui/InstructionText';
 
 // 59 destructuring prop onPickNumber
 function StartGameScreen({ onPickNumber }) {
+  // 85 useWindowDimensions keeps track of width and height
+  const { width, height } = useWindowDimensions();
+
   // 57 declared number holder
   const [enteredNumber, setEnteredNumber] = useState('');
 
@@ -40,8 +49,12 @@ function StartGameScreen({ onPickNumber }) {
     onPickNumber(choosenNumber);
   }
 
+  // 85 to set different marginTop when changing screen orientation
+  const marginTopDistance = height < 380 ? 30 : 100;
+
   return (
-    <View style={styles.rootContainer}>
+    // 85 added {marginTop: marginTopDistance}
+    <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
       <Title>Guess My Number</Title>
       {/* 68 Replaced View with Card */}
       <Card>
@@ -79,11 +92,14 @@ function StartGameScreen({ onPickNumber }) {
 
 export default StartGameScreen;
 
+// 85
+// const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   // 67 to top level View
   rootContainer: {
     flex: 1,
-    marginTop: 100,
+    // marginTop: deviceHeight < 380 ? 30 : 100, //85
     alignItems: 'center',
   },
 
