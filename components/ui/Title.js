@@ -18,5 +18,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'white',
     padding: 12,
+    maxWidth: '80%', // 81 width won't be greater than 300
+    width: 300, // 81
   },
 });

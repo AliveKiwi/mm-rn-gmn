@@ -95,7 +95,7 @@ function GameScreen({ userNumber, onGameOver }) {
   return (
     <View style={styles.screen}>
       {/* 63 Added Title */}
-      <Title>Opponent's Guess Screen</Title>
+      <Title>Opponent's Guess</Title>
       {/* 64 Added NumberContainer */}
       <NumberContainer>{currentGuess}</NumberContainer>
       {/* 68 Replaced View with new Card Component */}
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 24,
+    alignItems: 'center', // 81
   },
   instructionText: { marginBottom: 12 },
   // 69
