@@ -160,7 +160,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     alignItems: 'center', // 81
   },
+
   instructionText: { marginBottom: 12 },
+
   // 69
   buttonsContainer: {
     flexDirection: 'row', // Set buttons in rows
