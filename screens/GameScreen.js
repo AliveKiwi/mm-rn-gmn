@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Alert, StyleSheet, View, Text, FlatList } from 'react-native';
+import {
+  Alert,
+  StyleSheet,
+  View,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Title from '../components/ui/Title';
@@ -40,6 +46,9 @@ function GameScreen({ userNumber, onGameOver }) {
 
   // 75 keep track of number of guess
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
+
+  // 87
+  const { width, height } = useWindowDimensions();
 
   // 66 Game Over logic when rng() guess correct user's number
   useEffect(() => {
@@ -92,10 +101,9 @@ function GameScreen({ userNumber, onGameOver }) {
 
   const guessRoundsListLength = guessRounds.length;
 
-  return (
-    <View style={styles.screen}>
-      {/* 63 Added Title */}
-      <Title>Opponent's Guess</Title>
+  // 87 if in portrait mode then render this content
+  let content = (
+    <>
       {/* 64 Added NumberContainer */}
       <NumberContainer>{currentGuess}</NumberContainer>
       {/* 68 Replaced View with new Card Component */}
@@ -124,6 +132,35 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  // 87 if in landscape mode then render this content
+  if (width > 500) {
+    content = (
+      <>
+        <View style={styles.buttonContainerWide}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+              <Ionicons name="remove-outline" size={24} color="white" />
+            </PrimaryButton>
+          </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+              <Ionicons name="add-outline" size={24} color="white" />
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.screen}>
+      {/* 63 Added Title */}
+      <Title>Opponent's Guess</Title>
+      {content}
       {/* 75 <View>LOG ROUNDS</View> */}
       {/*
         {guessRounds.map((guessRound) => (
@@ -173,9 +210,17 @@ const styles = StyleSheet.create({
     flex: 1, // Make button expand to container
   },
 
+  // 87 for landscape mode
+  buttonContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
   // 78
   listContainer: {
     flex: 1,
-    padding: 24,
+    // padding:24 // 87 commented
+    paddingTop: 4, // 87 adjustment for landscape mode
+    paddingHorizontal: 24, // 87 adjustment for landscape mode
   },
 });
