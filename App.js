@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
 import AppLoading from 'expo-app-loading';
 
 import Colors from './constants/colors';
@@ -73,25 +74,28 @@ export default function App() {
   }
 
   return (
-    // 55 Use npx expo install install expo-linear-gradient to ensure compatibility of package with SDK
-    <LinearGradient
-      colors={[Colors.primary500, Colors.accent500]}
-      style={styles.rootScreen}
-    >
-      {/* 56 ImageBackground
-       * 59 changed from <StartGameScreen/> to {screen}
-       */}
-      <ImageBackground
-        source={require('./assets/images/background.png')}
-        resizeMode="cover"
+    <>
+      <StatusBar style="light" />
+      {/* 55 Use npx expo install install expo-linear-gradient to ensure compatibility of package with SDK */}
+      <LinearGradient
+        colors={[Colors.primary500, Colors.accent500]}
         style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
       >
-        {/* 61 Added SafeAreaView to get content under notch, works for iOS
+        {/* 56 ImageBackground
+         * 59 changed from <StartGameScreen/> to {screen}
          */}
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require('./assets/images/background.png')}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          {/* 61 Added SafeAreaView to get content under notch, works for iOS
+           */}
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
