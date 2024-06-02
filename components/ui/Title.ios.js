@@ -1,12 +1,14 @@
 // 62 When Component was created
 
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Platform } from 'react-native';
 
 function Title({ children }) {
   return <Text style={styles.title}>{children}</Text>;
 }
 
 export default Title;
+
+console.log(Platform);
 
 const styles = StyleSheet.create({
   title: {
@@ -15,7 +17,9 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
-    borderWidth: 2,
+    // borderWidth: Platform.OS === 'android' ? 2 : 0,
+    // borderWidth: Platform.select({ ios: 0, android: 2 }), // alternate to above
+    borderWidth: 0,
     borderColor: 'white',
     padding: 12,
     maxWidth: '80%', // 81 width won't be greater than 300
